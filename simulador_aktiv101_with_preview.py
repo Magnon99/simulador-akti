@@ -15,9 +15,10 @@ from PIL import Image, ImageDraw, ImageFont
 # ==============================
 # CONFIG
 # ==============================
-st.set_page_config(page_title="Simulador AKTI – PNG", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="Cálculo de Desconto - Grupo AKTI ", page_icon="⚡", layout="wide")
 MESES_PTB = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho",
              "Agosto","Setembro","Outubro","Novembro","Dezembro"]
+
 
 # ==============================
 # MODELOS DE DADOS
@@ -250,11 +251,11 @@ def exportar_png(titulo_mes: str, titulo_ano: int, e: Entradas, out: Saidas) -> 
 # ==============================
 # UI
 # ==============================
-st.title("⚡ Simulador AKTI – PNG")
+st.title("⚡ Cálculo de Desconto nas Faturas - Grupo AKTI")
 st.caption("Desconto ajustável, bandeiras exibidas brutas no topo e descontos abatidos no boleto.")
 
 # — DESCONTO —
-st.subheader("Desconto")
+st.subheader("Informe o Desconto")
 desconto_pct = st.number_input("Percentual de desconto (%)", min_value=0.0, max_value=100.0,
                                step=0.5, value=20.0, format="%.1f")
 
@@ -275,7 +276,7 @@ with col1:
         with st.expander("Preencher cada GDII / ATV", expanded=True):
             for i in range(int(n_gdii)):
                 c1, c2 = st.columns(2)
-                kwh = c1.number_input(f"GDII #{i+1} – kWh", min_value=0.0, step=0.01, value=542.0 if i==0 else 0.0, format="%.2f", key=f"gdii_{i}_kwh")
+                kwh = c1.number_input(f"GDII #{i+1} – kWh", min_value=0.0, step=0.01, value=0.0 if i==0 else 0.0, format="%.2f", key=f"gdii_{i}_kwh")
                 rs  = c2.number_input(f"GDII #{i+1} – Valor (R$)", min_value=0.0, step=0.01, value=0.0 if i==0 else 0.0, format="%.2f", key=f"gdii_{i}_rs")
                 atvs.append(ATV(kwh=kwh, rs=rs))
 
